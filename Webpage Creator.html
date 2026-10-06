@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tragic Fate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --snow: #f6f4fc;
+    --silver: #d6d1ec;
+    --lavender: #a99fd6;
+    --glow: #c8bdf5;
+    --navy: #1b2556;
+    --navy-deep: #111836;
+    --olive: #3c4a3a;
+    --olive-deep: #1c251d;
+    --blood: #c0303a;
+    --gold: #d8b36a;
+    --font: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { height: 100%; }
+
+  body {
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    padding: 56px 20px 72px;
+    color: var(--snow);
+    font-family: var(--font);
+    text-align: center;
+    overflow-x: hidden;
+    background: linear-gradient(170deg, var(--olive-deep) 0%, var(--navy-deep) 45%, var(--navy) 100%);
+    background-attachment: fixed;
+  }
+
+  /* Drifting light behind everything */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 25% 15%, rgba(200,189,245,.45), transparent 38%),
+      radial-gradient(circle at 80% 40%, rgba(169,159,214,.30), transparent 40%),
+      radial-gradient(circle at 30% 90%, rgba(192,48,58,.22), transparent 38%);
+    animation: drift 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translate3d(-3%, -2%, 0) scale(1); }
+    to   { transform: translate3d(3%, 3%, 0) scale(1.1); }
+  }
+
+  /* Falling snow */
+  #snow {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .flake {
+    position: absolute;
+    top: -10px;
+    border-radius: 50%;
+    background: var(--snow);
+    opacity: .8;
+    filter: blur(.5px);
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    to { transform: translate3d(var(--sway), 105vh, 0); }
+  }
+
+  main {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* Large "86" watermark behind the heading */
+  main::before {
+    content: "86";
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    font-size: clamp(11rem, 50vw, 20rem);
+    font-weight: 600;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(200,189,245,.25);
+    text-shadow: 0 0 60px rgba(200,189,245,.25);
+    pointer-events: none;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3.2rem, 13vw, 6.4rem);
+    font-weight: 600;
+    letter-spacing: .1em;
+    line-height: 1.05;
+    background: linear-gradient(180deg, #ffffff 10%, var(--glow) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 18px rgba(200,189,245,.65));
+  }
+
+  h1::after {
+    content: "";
+    display: block;
+    width: 90px;
+    height: 3px;
+    margin: 20px auto 0;
+    background: linear-gradient(90deg, transparent, var(--blood), transparent);
+    box-shadow: 0 0 14px var(--blood);
+  }
+
+  h2 {
+    margin: 18px 0 40px;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: .12em;
+    color: var(--silver);
+    text-shadow: 0 0 12px rgba(200,189,245,.5);
+  }
+
+  /* Poster with a glowing halo */
+  .poster-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 44px;
+  }
+  .poster-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -40px;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(200,189,245,.7), transparent 65%);
+    animation: pulse 5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: .55; transform: scale(.95); }
+    50%      { opacity: 1;   transform: scale(1.08); }
+  }
+
+  .poster {
+    display: block;
+    width: 250px;
+    max-width: 78vw;
+    height: auto;
+    padding: 6px;
+    background: linear-gradient(135deg, var(--gold), #f3dfae, var(--gold));
+    border-radius: 6px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.55), 0 0 30px rgba(216,179,106,.35);
+  }
+
+  /* Frosted-glass panels */
+  .memorial, .media {
+    background: rgba(246,244,252,.08);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(214,209,236,.28);
+    box-shadow: 0 10px 40px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.12);
+  }
+
+  .memorial {
+    margin: 0 auto 36px;
+    padding: 26px 26px 26px 28px;
+    max-width: 62ch;
+    text-align: left;
+    border-left: 4px solid var(--blood);
+    border-radius: 10px;
+  }
+  .memorial h1 {
+    font-size: clamp(1.15rem, 3.6vw, 1.4rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.75;
+    letter-spacing: .01em;
+    background: none;
+    color: var(--snow);
+    filter: none;
+    text-shadow: 0 0 14px rgba(200,189,245,.35);
+  }
+  .memorial h1::after { display: none; }
+  small { font-size: inherit; }
+
+  .media {
+    margin: 0 auto 26px;
+    padding: 20px;
+    max-width: 520px;
+    border-radius: 14px;
+  }
+
+  video {
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    background: var(--olive-deep);
+    box-shadow: 0 0 28px rgba(200,189,245,.35);
+  }
+
+  audio {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    accent-color: var(--blood);
+    border-radius: 30px;
+    box-shadow: 0 0 22px rgba(200,189,245,.35);
+  }
+
+  video:focus-visible, audio:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 40px 14px 56px; }
+    .memorial { padding: 20px 18px 20px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before, .poster-wrap::before { animation: none; }
+    #snow { display: none; }
+  }
+</style>
+</head>
+<body>
+<div id="snow" aria-hidden="true"></div>
+
+<main>
+  <h1>Eighty-Six</h1>
+  <h2>A New Season Unfolds</h2>
+
+  <div class="poster-wrap">
+    <img class="poster" src="img.jpg" alt="86" width="250">
+  </div>
+
+  <div class="memorial">
+    <h1><small>Many people have left, but their stories still remain.
+    Their names may fade, their voices may grow silent, but the memories they left behind continue to live on.
+    In a world filled with loss, some stories never truly end. They become the reason others keep moving forward.</small></h1>
+  </div>
+
+  <div class="media">
+    <video src="vid.mp4" width="250" controls muted></video>
+  </div>
+
+  <div class="media">
+    <audio src="music.mp3" controls></audio>
+  </div>
+</main>
+
+<script>
+  // Gentle snowfall
+  (function () {
+    var box = document.getElementById("snow");
+    for (var i = 0; i < 38; i++) {
+      var f = document.createElement("span");
+      var size = 2 + Math.random() * 4;
+      f.className = "flake";
+      f.style.width = f.style.height = size + "px";
+      f.style.left = Math.random() * 100 + "%";
+      f.style.opacity = 0.35 + Math.random() * 0.55;
+      f.style.animationDuration = 9 + Math.random() * 12 + "s";
+      f.style.animationDelay = -Math.random() * 20 + "s";
+      f.style.setProperty("--sway", (Math.random() * 80 - 40) + "px");
+      box.appendChild(f);
+    }
+  })();
+</script>
+</body>
+</html>
